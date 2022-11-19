@@ -1,0 +1,35 @@
+<head><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"></head>
+
+<div class="container">
+  <form #f="ngForm">
+    <div class="form-group">
+      <label>Id</label>
+      <input type="number" name="id" class="form-control" [(ngModel)]="product.id" #i="ngModel" required pattern="[0-9]+$">
+    </div>
+      <div class="alert alert-danger" *ngIf="i.invalid && i.touched">
+        <div *ngIf="i.errors?.['required']"> id is required field </div>
+        <div *ngIf="i.errors?.['pattern']"> please provide a valid id </div>
+      </div>
+        <div class="form-group">
+      <label>Title</label>
+      <input type="text" name="title" class="form-control" [(ngModel)]="product.title" #t="ngModel" required minlength="3">
+    </div>
+    <div class="alert alert-danger" *ngIf="t.invalid && t.touched">
+      <div *ngIf="t.errors?.['required']"> title is required</div>
+      <div *ngIf="t.errors?.['minlength']">title min length is 3</div>
+    </div>
+
+    <div class="form-group">
+      <label>Quantity</label>
+      <input type="number" name="quantity" class="form-control" [(ngModel)]="product.quantity" #q="ngModel" required
+      pattern="[1-9][0-9][0-9]">
+    </div>
+    <div class="alert alert-danger" *ngIf="t.invalid && t.touched">
+      <div *ngIf="q.errors?.['required']">quantity is required</div>
+      <div *ngIf="q.errors?.['pattern']">please provide a valid quantity</div>
+    </div>
+    <button class="btn btn-success"  [disabled]="f.invalid" (click)=" save()" >
+      save
+    </button>
+  </form>
+</div>
