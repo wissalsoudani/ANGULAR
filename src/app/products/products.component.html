@@ -7,27 +7,27 @@
   <input type="number" name="price" class="form-control" [(ngModel)]="priceMax">
   </div>
 </form>
+<p></p>
+<p></p>
+<div *ngFor="let p of productList">
+  <div class="col-md-3">
+    <div class="card" style="align-content: center">
+      <img src="../../assets/img.png" class="card-img-top" alt="">
+    <div class="card-body">
+      <h5 class="card-title">Product id: {{p.id}}</h5>
+      <h6 class="card-text">Product name: {{p.title}}</h6>
+      <p class="card-text"> Price: {{p.price}} $ -- Quantity: {{p.quantity}} $ -- like: {{p.like}}</p>
+      <button (click)="deletecommand(p.id)" type="button" class="btn-danger" >Delete</button>
 
-<table class="table">
- <tr>
-   <th>id</th>
-   <th>title</th>
-   <th>price</th>
-   <th>quantity</th>
-   <th>like</th>
- </tr>
-<tbody *ngFor="let p of productList; let i=index" >
-  <tr *ngIf="p.price==priceMax || priceMax==null">
-  <td>{{p.id}}</td>
-  <td> {{p.title}}</td>
-  <td> {{p.price}}</td>
-  <td> {{p.quantity}}</td>
-  <td>{{p.like}}</td>
+      <p></p>
+      <a routerLink="id-->{{p.id}},    title-->{{p.title}},   price-->{{p.price}},   quantity-->{{p.quantity}},   like-->{{p.like}}">detail</a>
 
-  <td>
-    <button class="btn btn-success" [disabled]="p.quantity==0"  (click)="buyProduct(i)"> buy</button></td>
-  <td>  <button class="btn btn-warning"  (click)="likeProduct(i)"> like</button></td>
+    </div>
+    </div>
+  </div>
+</div>
 
-</tr>
-</tbody>
- </table>
+<!--
+<button (click)="getAlertStock()">get Alert Stock</button>
+<h1>{{alertStock}}</h1>
+-->

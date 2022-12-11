@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from "../model/Product";
+import {ProductService} from "../services/product.service";
+
 
 @Component({
   selector: 'app-add-products',
@@ -9,20 +11,20 @@ import {Product} from "../model/Product";
 export class AddProductsComponent implements OnInit {
   product!: Product;
   list!: Product[];
+  productList!: Product[] ;
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
     this.product= new Product();
-    this.list=[];
-    console.log(this.list);
-
+    this.productService.getProduct().subscribe(
+      (data: Product[]) => this.list = data);
   }
 
   save(){
-    this.product.like=0;
-    this.list.push(this.product);
-    console.log('after the click');
-    console.log(this.list);
+    this.productService.postProduct(this.product).subscribe(
+      () => this.list = [this.product, ...this.list]
+    );
+
   }
 }
